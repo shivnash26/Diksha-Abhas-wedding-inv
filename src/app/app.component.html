@@ -1,0 +1,19 @@
+<div #root class="invite-root">
+  <canvas class="app-1" data-petals></canvas>
+  <div class="app-2" data-sparkle></div>
+  @if (showEnvelope) {
+    <app-envelope (open)="openInvite()"></app-envelope>
+  }
+  <app-nav></app-nav>
+  <app-music-button (toggle)="toggleMusic()"></app-music-button>
+  <app-hero></app-hero>
+  <app-countdown></app-countdown>
+  <app-couple></app-couple>
+  <app-memories></app-memories>
+  <app-events></app-events>
+  <app-awaiting></app-awaiting>
+  <app-families></app-families>
+  <app-rsvp [sent]="sent" (submitted)="submitRsvp($event)"></app-rsvp>
+  <app-venue></app-venue>
+  <app-footer></app-footer>
+</div>

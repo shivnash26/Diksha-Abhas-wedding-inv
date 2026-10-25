@@ -1,0 +1,64 @@
+<section class="rsvp-1" id="rsvp">
+  <div class="rsvp-2">
+    <div class="rsvp-3">
+      <div class="couple-4" data-reveal="1">Kindly respond by 30 October</div>
+      <h2 class="couple-5" data-reveal="1" data-delay="80">RSVP</h2>
+    </div>
+    @if (sent) {
+      <div class="rsvp-4">
+        <div class="rsvp-5">Thank you</div>
+        <div class="rsvp-6">आपकी उपस्थिति हमारे लिए आशीर्वाद है।</div>
+        <div class="rsvp-7">We have your response. Details for the day will reach you closer to December.</div>
+      </div>
+    }
+    @if (!sent) {
+      <form class="rsvp-8" (submit)="onSubmit($event)" data-reveal="1" data-delay="130">
+        <label class="rsvp-9">
+          <span class="rsvp-10">Full name</span>
+          <input class="rsvp-11" name="name" required="required" placeholder="Your name">
+        </label>
+        <div class="rsvp-12">
+          <label class="rsvp-9">
+            <span class="rsvp-10">Attending</span>
+            <select class="rsvp-13" name="attending">
+              <option value="yes">Joyfully accepts</option>
+              <option value="no">Regretfully declines</option>
+            </select>
+          </label>
+          <label class="rsvp-9">
+            <span class="rsvp-10">Guests</span>
+            <select class="rsvp-13" name="guests">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5+</option>
+            </select>
+          </label>
+        </div>
+        <div class="rsvp-14">
+          <span class="rsvp-10">Which days will you join?</span>
+          <div class="rsvp-15">
+            <label class="rsvp-16">
+              <input class="rsvp-17" type="checkbox" name="d" value="Haldi">
+              Haldi
+            </label>
+            <label class="rsvp-16">
+              <input class="rsvp-17" type="checkbox" name="d" value="Sangeet">
+              Sangeet
+            </label>
+            <label class="rsvp-16">
+              <input class="rsvp-17" type="checkbox" name="d" value="Varmala">
+              Varmala
+            </label>
+          </div>
+        </div>
+        <label class="rsvp-9">
+          <span class="rsvp-10">A note for the couple</span>
+          <textarea class="rsvp-18" name="note" rows="3" placeholder="Blessings, dietary needs, anything at all"></textarea>
+        </label>
+        <button class="rsvp-19" type="submit">Send Response</button>
+      </form>
+    }
+  </div>
+</section>
