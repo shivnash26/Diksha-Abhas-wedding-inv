@@ -1,7 +1,34 @@
 <section class="countdown-1">
   <div class="countdown-2" data-reveal="1">
-    <div class="countdown-3">Counting down</div>
-    <div class="countdown-4" data-countdown-days>00</div>
-    <div class="countdown-5">Days to go</div>
+    <div class="countdown-strip">
+      <span class="countdown-label countdown-label--top">Celebrate the couple</span>
+    </div>
+
+    <div class="countdown-panel">
+      <!-- revealed underneath the foil -->
+      <div class="countdown-under">
+        <div class="countdown-3">Counting down</div>
+        <div class="countdown-4" data-countdown-days>00</div>
+        <div class="countdown-5">Days to go</div>
+        <div class="countdown-clock">
+          <span data-countdown-hours>00</span><i>h</i>
+          <span data-countdown-minutes>00</span><i>m</i>
+          <span data-countdown-seconds>00</span><i>s</i>
+        </div>
+        <div class="countdown-date">Thursday · 3rd December 2026</div>
+      </div>
+
+      <!-- gold foil the guest scratches away -->
+      <canvas #foil class="countdown-foil" [class.is-gone]="revealed"
+              tabindex="0" role="button" aria-label="Scratch to reveal the countdown"
+              (keydown.enter)="reveal()" (keydown.space)="reveal(); $event.preventDefault()"></canvas>
+    </div>
+
+    <div class="countdown-strip">
+      <span class="countdown-label">Lucknow</span>
+    </div>
+
+    <span class="countdown-notch countdown-notch--left"></span>
+    <span class="countdown-notch countdown-notch--right"></span>
   </div>
 </section>

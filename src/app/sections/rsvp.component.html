@@ -1,8 +1,8 @@
 <section class="rsvp-1" id="rsvp">
   <div class="rsvp-2">
     <div class="rsvp-3">
-      <div class="couple-4" data-reveal="1">Kindly respond by 30 October</div>
-      <h2 class="couple-5" data-reveal="1" data-delay="80">RSVP</h2>
+      <div class="couple-4 rsvp-kicker" data-reveal="1">Kindly respond by 30 October</div>
+      <h2 class="couple-5 rsvp-title" data-reveal="1" data-delay="80">RSVP</h2>
     </div>
     @if (sent) {
       <div class="rsvp-4">
@@ -15,7 +15,7 @@
       <form class="rsvp-8" (submit)="onSubmit($event)" data-reveal="1" data-delay="130">
         <label class="rsvp-9">
           <span class="rsvp-10">Full name</span>
-          <input class="rsvp-11" name="name" required="required" placeholder="Your name">
+          <input class="rsvp-11" name="name" required="required" placeholder="Your name" autocomplete="name">
         </label>
         <div class="rsvp-12">
           <label class="rsvp-9">
@@ -36,26 +36,51 @@
             </select>
           </label>
         </div>
-        <div class="rsvp-14">
-          <span class="rsvp-10">Which days will you join?</span>
+
+        <fieldset class="rsvp-14">
+          <legend class="rsvp-10">Are you from bride’s side or groom’s?</legend>
           <div class="rsvp-15">
-            <label class="rsvp-16">
-              <input class="rsvp-17" type="checkbox" name="d" value="Haldi">
-              Haldi
-            </label>
-            <label class="rsvp-16">
-              <input class="rsvp-17" type="checkbox" name="d" value="Sangeet">
-              Sangeet
-            </label>
-            <label class="rsvp-16">
-              <input class="rsvp-17" type="checkbox" name="d" value="Varmala">
-              Varmala
-            </label>
+            @for (o of sides; track o) {
+              <label class="rsvp-16"><input class="rsvp-17" type="radio" name="side" [value]="o">{{ o }}</label>
+            }
           </div>
-        </div>
+        </fieldset>
+
+        <fieldset class="rsvp-14">
+          <legend class="rsvp-10">Will you be bringing someone with you?</legend>
+          <div class="rsvp-15">
+            @for (o of plusOne; track o) {
+              <label class="rsvp-16"><input class="rsvp-17" type="radio" name="plusOne" [value]="o">{{ o }}</label>
+            }
+          </div>
+        </fieldset>
+
+        <label class="rsvp-9">
+          <span class="rsvp-10">What are the names of people attending?</span>
+          <input class="rsvp-11" name="attendees" placeholder="Everyone coming with you">
+        </label>
+
+        <fieldset class="rsvp-14">
+          <legend class="rsvp-10">How will you be traveling to Lucknow?</legend>
+          <div class="rsvp-15">
+            @for (o of travel; track o) {
+              <label class="rsvp-16"><input class="rsvp-17" type="radio" name="travel" [value]="o">{{ o }}</label>
+            }
+          </div>
+        </fieldset>
+
+        <fieldset class="rsvp-14">
+          <legend class="rsvp-10">Which days will you join?</legend>
+          <div class="rsvp-15">
+            @for (o of days; track o) {
+              <label class="rsvp-16"><input class="rsvp-17" type="checkbox" name="d" [value]="o">{{ o }}</label>
+            }
+          </div>
+        </fieldset>
+
         <label class="rsvp-9">
           <span class="rsvp-10">A note for the couple</span>
-          <textarea class="rsvp-18" name="note" rows="3" placeholder="Blessings, dietary needs, anything at all"></textarea>
+          <textarea class="rsvp-18" name="note" rows="3" placeholder="Blessings/love, dietary foods, skincare tips, anything at all"></textarea>
         </label>
         <button class="rsvp-19" type="submit">Send Response</button>
       </form>

@@ -42,6 +42,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.fx.openEnvelope(() => { this.opened = true; this.cdr.detectChanges(); this.fx.observe(); });
   }
 
+  onEnvelopeTap() { if (invitation.musicSrc && invitation.musicOnOpen) this.fx.startMusic(); }
+
   toggleMusic() { this.fx.toggleMusic(); }
 
   async submitRsvp(data: Record<string, unknown>) {

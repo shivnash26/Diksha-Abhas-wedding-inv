@@ -9,4 +9,15 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class EnvelopeComponent {
   @Output() open = new EventEmitter<void>();
+  @Output() tapped = new EventEmitter<void>(); // fires straight away, inside the tap, so music may start
+  opening = false;
+
+  // break the seal and lift the flap, then hand over to the page fade-out
+  start() {
+    if (this.opening) return;
+    this.opening = true;
+    this.tapped.emit();
+    const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(() => this.open.emit(), reduced ? 0 : 750);
+  }
 }

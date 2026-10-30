@@ -18,18 +18,34 @@ export function startInvitationEffects(root, options = {}) {
   if (opts.envelopeIntro) document.body.style.overflow = 'hidden';
 
   /* ---------- scroll reveal ---------- */
+  const show = (el) => { el.__shown = true; el.style.opacity = '1'; el.style.transform = 'none'; };
   const revealAll = () => {
-    root.querySelectorAll('[data-reveal]').forEach((el) => { el.style.opacity = '1'; el.style.transform = 'none'; });
+    root.querySelectorAll('[data-reveal]').forEach(show);
   };
   const io = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (!e.isIntersecting) return;
       const el = e.target;
       const d = parseFloat(el.getAttribute('data-delay') || '0');
-      setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'none'; }, d);
+      el.__shown = true; // claimed here so the safety net below doesn't cut the stagger short
+      setTimeout(() => show(el), d);
       io.unobserve(el);
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' }) : null;
+  }, { threshold: 0, rootMargin: '0px 0px -6% 0px' }) : null;
+
+  // safety net: some phone / in-app browsers drop observer callbacks, which left
+  // whole sections (e.g. the events) invisible. Anything already on screen or
+  // scrolled past is shown on the next scroll, even if the observer never fired.
+  let sweepQueued = false;
+  const sweep = () => {
+    sweepQueued = false;
+    const h = window.innerHeight || document.documentElement.clientHeight;
+    root.querySelectorAll('[data-reveal]').forEach((el) => {
+      if (el.__shown) return;
+      if (el.getBoundingClientRect().top < h * 0.94) { io && io.unobserve(el); show(el); }
+    });
+  };
+  const queueSweep = () => { if (!sweepQueued) { sweepQueued = true; setTimeout(sweep, 400); } };
 
   const observe = () => {
     if (!io) return revealAll();
@@ -45,6 +61,9 @@ export function startInvitationEffects(root, options = {}) {
     if (!root.querySelector('[data-reveal][style*="opacity: 1"]')) revealAll();
   }, 2500);
   const onVis = () => { if (document.visibilityState === 'hidden') revealAll(); };
+  window.addEventListener('scroll', queueSweep, { passive: true });
+  window.addEventListener('resize', queueSweep);
+  window.addEventListener('pageshow', queueSweep); // coming back with the browser's back button
   document.addEventListener('visibilitychange', onVis);
   window.addEventListener('beforeprint', revealAll);
   cleanups.push(() => {
@@ -52,6 +71,9 @@ export function startInvitationEffects(root, options = {}) {
     clearTimeout(revealTimer);
     document.removeEventListener('visibilitychange', onVis);
     window.removeEventListener('beforeprint', revealAll);
+    window.removeEventListener('scroll', queueSweep);
+    window.removeEventListener('resize', queueSweep);
+    window.removeEventListener('pageshow', queueSweep);
   });
 
   /* ---------- parallax + nav ---------- */
@@ -197,13 +219,27 @@ export function startInvitationEffects(root, options = {}) {
     setTimeout(() => { list.forEach((o) => { try { o.stop(); } catch (e) { /* ignore */ } }); try { ctx.close(); } catch (e) { /* ignore */ } }, 900);
     ac = null; oscs = null;
   };
-  const toggleMusic = () => {
-    music = !music;
+  const paintEq = () => {
     const eq = q('[data-music-eq]');
     if (eq) Array.prototype.forEach.call(eq.children, (bar, i) => {
       bar.style.animation = music ? 'floaty ' + (0.6 + i * 0.17) + 's ease-in-out infinite' : 'none';
       bar.style.opacity = music ? '1' : '.45';
     });
+  };
+  // a song file (opts.musicSrc) plays on a loop; without one, a soft tone is generated
+  let song = null;
+  const playSong = () => {
+    if (!song) {
+      song = new Audio(opts.musicSrc);
+      song.loop = true;
+      song.volume = opts.musicVolume ?? 0.5;
+    }
+    song.play().catch(() => { music = false; paintEq(); }); // blocked or file missing
+  };
+  const toggleMusic = () => {
+    music = !music;
+    paintEq();
+    if (opts.musicSrc) return music ? playSong() : song && song.pause();
     if (!music) return stopMusic();
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return;
@@ -228,7 +264,9 @@ export function startInvitationEffects(root, options = {}) {
       return o;
     });
   };
-  cleanups.push(stopMusic);
+  cleanups.push(stopMusic, () => song && song.pause());
+  // browsers only allow sound after a tap, so this is called from the envelope tap
+  const startMusic = () => { if (!music) toggleMusic(); };
 
   /* ---------- envelope ---------- */
   let opening = false;
@@ -240,9 +278,14 @@ export function startInvitationEffects(root, options = {}) {
     const finish = () => {
       if (done) return;
       done = true;
+      const scrollBehavior = document.documentElement.style.scrollBehavior;
+      document.documentElement.style.scrollBehavior = 'auto';
       document.body.style.overflow = '';
+      window.scrollTo(0, 0);
+      document.documentElement.style.scrollBehavior = scrollBehavior;
       onDone && onDone();
-      requestAnimationFrame(() => { window.scrollTo(0, 0); onScroll(); observe(); });
+      onScroll();
+      observe();
     };
     if (env && env.animate) {
       env.animate([{ opacity: 1, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(1.1)' }],
@@ -255,6 +298,7 @@ export function startInvitationEffects(root, options = {}) {
     observe,
     openEnvelope,
     toggleMusic,
+    startMusic,
     destroy() {
       cleanups.forEach((fn) => fn());
       document.body.style.overflow = '';
