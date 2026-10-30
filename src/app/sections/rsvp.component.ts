@@ -11,6 +11,11 @@ export class RsvpComponent {
   @Input() sent = false;
   @Output() submitted = new EventEmitter<Record<string, unknown>>();
 
+  readonly sides = ['Bride', 'Groom', 'Both'];
+  readonly plusOne = ['Yes', 'No', 'Not sure'];
+  readonly travel = ['By car directly to the venue', 'Flying to Lucknow first', 'Coming by train to Lucknow Station', 'Need to plan'];
+  readonly days = ['Haldi', 'Sangeet', 'Tel Poojan', 'Matra Poojan', 'Varmala'];
+
   onSubmit(e: Event) {
     e.preventDefault();
     const form = e.target as HTMLFormElement;

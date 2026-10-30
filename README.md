@@ -39,8 +39,20 @@ The groom and event photo boxes are placeholders. Put your photo in
 `public/images/` and replace the placeholder `<div class="... slot slot--empty">`
 with the `<img>` line given in the comment just above it.
 
+### Background music
+1. Put your song in `public/audio/`, for example `public/audio/wedding-song.mp3`
+   (MP3 works in every browser; keep it under ~5 MB so it loads quickly).
+2. In `src/app/config.ts` set `musicSrc: 'audio/wedding-song.mp3'` (no leading slash).
+   `musicVolume` sets the loudness (0–1).
+
+The song loops and starts when the guest taps the envelope. Browsers block sound
+until the visitor taps something, so it can't start before that. Guests can pause
+it with the music button in the corner. Turn off `musicOnOpen` to start it only
+from that button.
+
 ### Save RSVPs to a spreadsheet (Google Sheets → Excel)
-Each RSVP is saved as a new row: time, name, attending, guests, days, note.
+Each RSVP is saved as a new row: time, name, attending, guests, days, note, side,
+bringing someone, attendee names and travel.
 
 1. Go to [sheets.new](https://sheets.new) to create a Google Sheet, for example "Wedding RSVPs".
 2. In the sheet, open **Extensions → Apps Script**. Delete the code there, paste in

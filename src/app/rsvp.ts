@@ -17,6 +17,10 @@ export async function sendRsvp(data) {
     guests: data.guests || '',
     days: (data.days || []).join(', '),
     note: data.note || '',
+    side: data.side || '',
+    plusOne: data.plusOne || '',
+    attendees: data.attendees || '',
+    travel: data.travel || '',
   });
   // 'no-cors' lets the browser post to Google without CORS errors.
   await fetch(url, { method: 'POST', mode: 'no-cors', body });
