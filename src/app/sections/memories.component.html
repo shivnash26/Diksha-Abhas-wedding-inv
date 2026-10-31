@@ -1,3 +1,32 @@
 <section class="memories-1" id="memories">
-  <div class="memories-2"></div>
+  <div class="memories-2" data-reveal="1">
+    <h2 class="memories-title">Meet the Bride &amp; Groom</h2>
+    <p class="memories-tagline">Together they are calmly chaotic, and think that a cup of coffee could fix everything.</p>
+    <div class="memories-rule" aria-hidden="true"><span></span>✦<span></span></div>
+
+    <div class="memories-grid">
+      @for (p of together; track $index) {
+        @if (p.src) {
+          <img class="memories-photo slot" [src]="p.src" [alt]="p.alt" loading="lazy">
+        } @else {
+          <div class="memories-photo slot slot--empty"><span>Photo {{ $index + 1 }}</span></div>
+        }
+      }
+    </div>
+
+    <div class="memories-subhead"><span></span><h3>Us over the years</h3><span></span></div>
+
+    <div class="memories-grid">
+      @for (p of overTheYears; track $index) {
+        @if (p.src) {
+          <img class="memories-photo slot" [src]="p.src" [alt]="p.alt" loading="lazy">
+        } @else {
+          <div class="memories-photo slot slot--empty"><span>Photo {{ $index + 5 }}</span></div>
+        }
+      }
+    </div>
+
+    <div class="memories-rule memories-rule--plain" aria-hidden="true"><span></span></div>
+    <p class="memories-story">A shared love for food, music, coffee, travelling, green corners and doing absolutely nothing together somehow turned into a lifetime plan.</p>
+  </div>
 </section>

@@ -1,125 +1,38 @@
 <section class="events-1" id="events">
   <div class="events-2">
     <div class="events-3">
-      <div class="events-4" data-reveal="1">Three days of celebration</div>
+      <div class="events-4" data-reveal="1">Days of celebration</div>
       <h2 class="events-5" data-reveal="1" data-delay="80">Events Schedule</h2>
-      <div class="events-6" data-reveal="1" data-delay="130">कार्यक्रम</div>
     </div>
     <div class="events-7">
-      <div class="events-8" data-reveal="1" data-delay="0">
-        <div class="events-9">
-          <!-- Replace with: <img class="events-10 slot" src="images/your-photo.jpg" alt="Haldi photo"> -->
-          <img class="events-10 slot" src="images/haldi.jpg" alt="Haldi photo">
-        </div>
-        <div class="events-11">
-          <div class="countdown-3">One · Sun, 29 Nov 2026</div>
-          <div class="events-12">Haldi</div>
-          <div class="events-13">The Golden Morning</div>
-          <div class="events-14"></div>
-          <div class="events-15">1:00 PM – 2:00 PM</div>
-          <div class="events-16">
-            <div class="events-17">Colours of the day</div>
-            <div class="events-18">
-              <div class="events-19"></div>
-              <div class="events-20"></div>
-              <div class="events-21"></div>
-            </div>
-            <div class="events-22">Comfy pastels &amp; marigold yellows</div>
+      @for (e of events; track e.title; let first = $first) {
+        @if (!first) {
+          <div class="ev-sep ev--{{ e.theme }}" data-reveal="1" aria-hidden="true"><span></span>✦<span></span></div>
+        }
+        <article class="ev-card ev--{{ e.theme }}" data-reveal="1">
+          <div class="ev-numeral" aria-hidden="true">{{ e.numeral }}</div>
+          <div class="ev-ring" aria-hidden="true"></div>
+          <div class="ev-ring ev-ring--dashed" aria-hidden="true"></div>
+          <div class="ev-body">
+            <div class="ev-date"><span></span>{{ e.date }}<span></span></div>
+            <h3 class="ev-title">{{ e.title }}</h3>
+            <p class="ev-sub">{{ e.subtitle }}</p>
+            <div class="ev-rule"></div>
+            <div class="ev-time">{{ e.time }}</div>
+            @if (e.colours) {
+              <div class="ev-kicker">Colours of the event</div>
+              <div class="ev-swatches">
+                @for (c of e.colours; track $index) {
+                  <span class="ev-swatch" [style.background]="c"></span>
+                }
+              </div>
+            }
+            @if (e.note) {
+              <div class="ev-note">{{ e.note }}</div>
+            }
           </div>
-        </div>
-      </div>
-      <div class="events-23" data-reveal="1">✦</div>
-      <div class="events-8" data-reveal="1" data-delay="80">
-        <div class="events-9">
-          <!-- Replace with: <img class="events-10 slot" src="images/your-photo.jpg" alt="Sangeet photo"> -->
-          <img class="events-10 slot" src="images/sangeet.jpg" alt="Sangeet photo">
-        </div>
-        <div class="events-11">
-          <div class="countdown-3">Two · Sun, 29 Nov 2026</div>
-          <div class="events-12">Sangeet</div>
-          <div class="events-13">The Night of Song</div>
-          <div class="events-14"></div>
-          <div class="events-15">7:00 PM onwards</div>
-          <div class="events-16">
-            <div class="events-17">Colours of the day</div>
-            <div class="events-18">
-              <div class="events-24"></div>
-              <div class="events-25"></div>
-              <div class="events-26"></div>
-            </div>
-            <div class="events-22">Glamorous cocktail &amp; jewel tones</div>
-          </div>
-        </div>
-      </div>
-      <div class="events-23" data-reveal="1">✦</div>
-      <div class="events-8" data-reveal="1" data-delay="80">
-        <div class="events-9">
-          <!-- Replace with: <img class="events-10 slot" src="images/your-photo.jpg" alt="Tel Poojan photo"> -->
-          <img class="events-10 slot" src="images/tel.jpg" alt="Tel Poojan photo">
-        </div>
-        <div class="events-11">
-          <div class="countdown-3">Three · Wed, 2 Dec 2026</div>
-          <div class="events-12">Tel Poojan</div>
-          <div class="events-13">Purification and Glow</div>
-          <div class="events-14"></div>
-          <div class="events-15">12:00 PM onwards</div>
-          <div class="events-16">
-            <div class="events-17">Colours of the day</div>
-            <div class="events-18">
-              <div class="events-19"></div>
-              <div class="events-20"></div>
-              <div class="events-21"></div>
-            </div>
-            <div class="events-22">Comfy pastels &amp; marigold yellows</div>
-          </div>
-        </div>
-      </div>
-      <div class="events-23" data-reveal="1">✦</div>
-      <div class="events-8" data-reveal="1" data-delay="80">
-        <div class="events-9">
-          <!-- Replace with: <img class="events-10 slot" src="images/your-photo.jpg" alt="Matra Poojan photo"> -->
-          <img class="events-10 slot" src="images/matra.jpg" alt="Matra Poojan photo">
-        </div>
-        <div class="events-11">
-          <div class="countdown-3">Four · Wed, 2 Dec 2026</div>
-          <div class="events-12">Matra Poojan</div>
-          <div class="events-13">Seeking Blessings</div>
-          <div class="events-14"></div>
-          <div class="events-15">2:00 PM onwards</div>
-          <div class="events-16">
-            <div class="events-17">Colours of the day</div>
-            <div class="events-18">
-              <div class="events-19"></div>
-              <div class="events-20"></div>
-              <div class="events-21"></div>
-            </div>
-            <div class="events-22">Comfy pastels &amp; marigold yellows</div>
-          </div>
-        </div>
-      </div>
-      <div class="events-23" data-reveal="1">✦</div>
-      <div class="events-8" data-reveal="1" data-delay="160">
-        <div class="events-9">
-          <!-- Replace with: <img class="events-10 slot" src="images/your-photo.jpg" alt="Varmala photo"> -->
-          <img class="events-10 slot" src="images/varmala.jpg" alt="Varmala photo">
-        </div>
-        <div class="events-11">
-          <div class="countdown-3">Five · Thu, 3 Dec 2026</div>
-          <div class="events-12">Varmala</div>
-          <div class="events-13">The Exchange of Garlands</div>
-          <div class="events-14"></div>
-          <div class="events-15">6:00 PM onwards</div>
-          <div class="events-16">
-            <div class="events-17">Colours of the day</div>
-            <div class="events-18">
-              <div class="events-27"></div>
-              <div class="events-26"></div>
-              <div class="events-24"></div>
-            </div>
-            <div class="events-22">Traditional Indian finery</div>
-          </div>
-        </div>
-      </div>
+        </article>
+      }
     </div>
   </div>
 </section>

@@ -14,7 +14,7 @@ export class RsvpComponent {
   readonly sides = ['Bride', 'Groom', 'Both'];
   readonly plusOne = ['Yes', 'No', 'Not sure'];
   readonly travel = ['By car directly to the venue', 'Flying to Lucknow first', 'Coming by train to Lucknow Station', 'Need to plan'];
-  readonly days = ['Haldi', 'Sangeet', 'Tel Poojan', 'Matra Poojan', 'Varmala'];
+  readonly days = ['Haldi', 'Sangeet', 'Tel Poojan', 'Matra Poojan', 'Baraat', 'Vidaai'];
 
   onSubmit(e: Event) {
     e.preventDefault();
