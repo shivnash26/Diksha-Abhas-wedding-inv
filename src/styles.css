@@ -1536,6 +1536,40 @@ img.memories-photo:hover { transform:translateY(-4px); box-shadow:0 20px 36px rg
   align-items:center;
   gap:12px;
 }
+.ev-icon {
+  width:64px;
+  height:64px;
+  margin-bottom:2px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.6);
+  border:1px solid var(--line);
+  box-shadow:0 0 0 5px rgba(255,255,255,.28),0 8px 18px -8px rgba(80,60,40,.35);
+  color:var(--ink);
+}
+.ev-icon svg {
+  width:34px;
+  height:34px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+/* the garland is drawn as a row of beads */
+.ev--baraat .ev-icon path:first-child { stroke-width:2.2; stroke-dasharray:0 2.5; }
+.ev-picture {
+  width:min(220px,64%);
+  aspect-ratio:4/3;
+  object-fit:cover;
+  margin-bottom:4px;
+  border-radius:110px 110px 14px 14px;
+  border:4px solid #fff;
+  box-shadow:0 0 0 1px var(--line),0 14px 28px -12px rgba(80,60,40,.45);
+  background:#fff;
+}
+
 .ev-date {
   display:flex;
   align-items:center;
@@ -1589,6 +1623,35 @@ img.memories-photo:hover { transform:translateY(-4px); box-shadow:0 20px 36px rg
   letter-spacing:.03em;
   color:var(--soft);
 }
+.ev-place {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 14px 5px 10px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.55);
+  font-size:14px;
+  letter-spacing:.06em;
+  color:var(--ink);
+  text-decoration:none;
+  transition:background .25s ease;
+}
+.ev-place:hover { background:rgba(255,255,255,.85); }
+.ev-place svg { width:14px; height:14px; fill:currentColor; opacity:.8; }
+.ev-cal { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:6px; }
+.ev-cal-btn {
+  padding:8px 16px;
+  border-radius:999px;
+  background:var(--ink);
+  color:#fff;
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  text-decoration:none;
+  box-shadow:0 6px 16px -6px rgba(90,30,50,.5);
+}
+.ev-cal-btn:hover { filter:brightness(1.12); }
 .ev-sep {
   opacity:0;
   transform:translateY(26px);
@@ -1994,6 +2057,60 @@ img.memories-photo:hover { transform:translateY(-4px); box-shadow:0 20px 36px rg
 .venue-7:hover {
   filter:brightness(1.06);
 }
+
+.venue-contact {
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1);
+  margin-top:clamp(26px,4vw,40px);
+  padding:22px clamp(18px,4vw,34px);
+  border-radius:18px;
+  background:rgba(255,255,255,.7);
+  border:1px solid rgba(201,162,74,.35);
+  box-shadow:0 14px 30px rgba(150,115,60,.12);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  width:min(440px,100%);
+  box-sizing:border-box;
+}
+.venue-contact-kicker { font-size:10px; letter-spacing:.36em; text-transform:uppercase; color:#a08a6a; }
+.venue-contact-name { font-family:'Great Vibes',cursive; font-size:34px; line-height:1.1; color:#7a1f3d; }
+.venue-contact-row { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px 10px; }
+.venue-contact-num { font-size:17px; letter-spacing:.06em; color:#4a4038; min-width:150px; }
+.venue-contact-btn {
+  padding:6px 14px;
+  border-radius:999px;
+  border:1px solid rgba(122,31,61,.3);
+  color:#7a1f3d;
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+}
+.venue-contact-btn:hover { background:rgba(122,31,61,.06); }
+.venue-contact-btn--wa { border-color:rgba(37,140,90,.35); color:#1f7a50; }
+.venue-contact-btn--wa:hover { background:rgba(37,140,90,.07); }
+@media (max-width: 420px) {
+  .venue-contact-num { flex-basis:100%; text-align:center; }
+}
+
+.footer-cal {
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1);
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px 12px;
+  font-size:12px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(255,246,236,.5);
+}
+.footer-cal a { color:#e6c77a; text-decoration:none; }
+.footer-cal a:hover { text-decoration:underline; }
 
 .footer-1 {
   position:relative;

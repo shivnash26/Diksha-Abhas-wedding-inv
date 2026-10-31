@@ -12,7 +12,9 @@ export class RsvpComponent {
   @Output() submitted = new EventEmitter<Record<string, unknown>>();
 
   readonly sides = ['Bride', 'Groom', 'Both'];
-  readonly plusOne = ['Yes', 'No', 'Not sure'];
+  // drive which questions are shown (declining hides the travel / days questions)
+  attending = 'yes';
+  guests = '1';
   readonly travel = ['By car directly to the venue', 'Flying to Lucknow first', 'Coming by train to Lucknow Station', 'Need to plan'];
   readonly days = ['Haldi', 'Sangeet', 'Tel Poojan', 'Matra Poojan', 'Baraat', 'Vidaai'];
 

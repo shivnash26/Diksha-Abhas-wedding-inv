@@ -14,11 +14,27 @@
           <div class="ev-ring" aria-hidden="true"></div>
           <div class="ev-ring ev-ring--dashed" aria-hidden="true"></div>
           <div class="ev-body">
+            @if (art === 'pictures' && e.image) {
+              <img class="ev-picture" [src]="e.image" alt="" loading="lazy">
+            } @else {
+              <div class="ev-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  @for (d of icons[e.theme]; track $index) {
+                    <path [attr.d]="d" />
+                  }
+                </svg>
+              </div>
+            }
             <div class="ev-date"><span></span>{{ e.date }}<span></span></div>
             <h3 class="ev-title">{{ e.title }}</h3>
             <p class="ev-sub">{{ e.subtitle }}</p>
             <div class="ev-rule"></div>
             <div class="ev-time">{{ e.time }}</div>
+            <a class="ev-place" [href]="e.place.url" target="_blank" rel="noopener"
+               [attr.aria-label]="e.place.label + ' – open in Google Maps'">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+              {{ e.place.label }}
+            </a>
             @if (e.colours) {
               <div class="ev-kicker">Colours of the event</div>
               <div class="ev-swatches">
@@ -29,6 +45,12 @@
             }
             @if (e.note) {
               <div class="ev-note">{{ e.note }}</div>
+            }
+            @if (e.calendar) {
+              <div class="ev-cal">
+                <a class="ev-cal-btn" [href]="googleCalendarUrl" target="_blank" rel="noopener">+ Google Calendar</a>
+                <a class="ev-cal-btn" [href]="icsUrl" download="diksha-abhas-wedding.ics">+ Apple / Outlook</a>
+              </div>
             }
           </div>
         </article>

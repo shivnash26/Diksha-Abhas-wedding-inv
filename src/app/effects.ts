@@ -1,7 +1,7 @@
 // @ts-nocheck
 /*
  * All the animations of the invitation, written in plain JavaScript so the
- * same file works in both the React and the Angular project.
+ * code stays independent of Angular.
  *
  *  - scroll reveal ([data-reveal], [data-delay])
  *  - parallax ([data-par]) and the nav bar that fades in after the hero
@@ -77,17 +77,27 @@ export function startInvitationEffects(root, options = {}) {
   });
 
   /* ---------- parallax + nav ---------- */
-  const onScroll = () => {
+  // runs at most once per frame, however fast the guest scrolls
+  let scrollFrame = 0;
+  const paintScroll = () => {
+    scrollFrame = 0;
     const y = window.scrollY || document.documentElement.scrollTop || 0;
     root.querySelectorAll('[data-par]').forEach((el) => {
       el.style.transform = 'translate3d(0,' + (y * parseFloat(el.getAttribute('data-par'))).toFixed(1) + 'px,0)';
     });
     const nav = q('[data-nav]');
-    if (nav) nav.style.opacity = y > window.innerHeight * 0.7 ? '1' : '0';
+    if (nav) {
+      const visible = y > window.innerHeight * 0.7;
+      nav.style.opacity = visible ? '1' : '0';
+      // while hidden over the hero its links must not catch taps
+      nav.style.pointerEvents = visible ? '' : 'none';
+      nav.toggleAttribute('inert', !visible);
+    }
   };
+  const onScroll = () => { if (!scrollFrame) scrollFrame = requestAnimationFrame(paintScroll); };
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-  cleanups.push(() => window.removeEventListener('scroll', onScroll));
+  paintScroll();
+  cleanups.push(() => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(scrollFrame); });
 
   /* ---------- countdown ---------- */
   const target = new Date(opts.weddingDate).getTime();
@@ -109,11 +119,14 @@ export function startInvitationEffects(root, options = {}) {
   cleanups.push(() => clearInterval(tick));
 
   /* ---------- falling petals ---------- */
-  const cv = q('[data-petals]');
+  // no petals for guests who asked their phone to reduce motion; half as many on small screens
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const smallScreen = window.matchMedia && window.matchMedia('(max-width: 700px)').matches;
+  const cv = reduceMotion ? null : q('[data-petals]');
   if (cv) {
     const ctx = cv.getContext('2d');
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const count = Math.max(0, Math.round(opts.petalCount ?? 38));
+    const count = Math.max(0, Math.round((opts.petalCount ?? 38) * (smallScreen ? 0.5 : 1)));
     let W = 0, H = 0, raf = 0;
     const petalColors = ['#f2a7bd', '#f6c9d6', '#e8869f', '#fbe0e7'];
     const leafColors = ['#8fbf9f', '#6f9e78', '#b6d3a8'];
@@ -284,7 +297,7 @@ export function startInvitationEffects(root, options = {}) {
       window.scrollTo(0, 0);
       document.documentElement.style.scrollBehavior = scrollBehavior;
       onDone && onDone();
-      onScroll();
+      paintScroll();
       observe();
     };
     if (env && env.animate) {

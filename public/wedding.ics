@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Diksha and Abhas//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:diksha-abhas-wedding-20261203@shivnash26.github.io
+DTSTAMP:20261031T000000Z
+DTSTART:20261203T123000Z
+DTEND:20261203T183000Z
+SUMMARY:Diksha & Abhas – Wedding (Band\, Baaja & Baraat)
+LOCATION:Lotus Portico Club\, Jankipuram Ext\, Beside ORO City\, Lucknow
+DESCRIPTION:Your invitation: https://shivnash26.github.io/wedding-invite-angular/
+URL:https://shivnash26.github.io/wedding-invite-angular/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Diksha & Abhas wedding tomorrow
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+END:VCALENDAR
