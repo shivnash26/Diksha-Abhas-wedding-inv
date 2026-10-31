@@ -21,7 +21,7 @@ Then open http://localhost:4200 in your browser.
 | Names, parents, date, venue on the first screen | `src/app/sections/hero.component.html` |
 | Envelope screen ("You're Invited") | `src/app/sections/envelope.component.html` |
 | Couple cards and favourites | `src/app/sections/couple.component.html` |
-| Haldi / Sangeet / Varmala timings and colours | `src/app/sections/events.component.html` |
+| Event names, dates, timings and colours | `src/app/sections/events.component.ts` |
 | Families | `src/app/sections/families.component.html` |
 | RSVP form and deadline text | `src/app/sections/rsvp.component.html` |
 | Venue and Google Map | `src/app/sections/venue.component.html` |

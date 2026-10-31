@@ -8,12 +8,12 @@
   <app-music-button (toggle)="toggleMusic()"></app-music-button>
   <app-hero></app-hero>
   <app-countdown></app-countdown>
-  <app-couple></app-couple>
   <app-memories></app-memories>
+  <app-couple></app-couple>
+  <app-rsvp [sent]="sent" (submitted)="submitRsvp($event)"></app-rsvp>
   <app-events></app-events>
   <app-awaiting></app-awaiting>
   <app-families></app-families>
-  <app-rsvp [sent]="sent" (submitted)="submitRsvp($event)"></app-rsvp>
   <app-venue></app-venue>
   <app-footer></app-footer>
 </div>
