@@ -2,12 +2,25 @@
   <div class="venue-2">
     <div class="couple-4" data-reveal="1">Where to find us</div>
     <h2 class="venue-3" data-reveal="1" data-delay="80">The Venue</h2>
-    <div class="venue-4" data-reveal="1" data-delay="130">Lotus Portico Club<br>Lucknow, Uttar Pradesh</div>
+    <div class="venue-4" data-reveal="1" data-delay="130">Lotus Portico Club<br>Jankipuram Ext, Beside ORO City<br>Lucknow</div>
     <div class="venue-5" data-reveal="1" data-delay="180">
       <iframe class="venue-6" title="Venue map" src="https://maps.google.com/maps?q=Lotus%20Portico%20Club%20Lucknow&z=14&output=embed" loading="lazy"></iframe>
     </div>
     <a class="venue-7" href="https://maps.google.com/?q=Lotus%20Portico%20Club%20Lucknow" target="_blank" rel="noopener" data-reveal="1" data-delay="230">
       ✦ Get Directions ✦
     </a>
+
+    <!-- questions about the day, travel or stay -->
+    <div class="venue-contact" data-reveal="1" data-delay="280">
+      <div class="venue-contact-kicker">Questions? Reach out to</div>
+      <div class="venue-contact-name">Shivansh Singh</div>
+      @for (n of phones; track n.tel) {
+        <div class="venue-contact-row">
+          <span class="venue-contact-num">{{ n.display }}</span>
+          <a class="venue-contact-btn" [href]="'tel:+91' + n.tel">Call</a>
+          <a class="venue-contact-btn venue-contact-btn--wa" [href]="'https://wa.me/91' + n.tel" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      }
+    </div>
   </div>
 </section>

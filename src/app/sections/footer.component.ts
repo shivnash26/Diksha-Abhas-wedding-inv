@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { googleCalendarUrl, icsUrl } from '../calendar';
 
 @Component({
   selector: 'app-footer',
@@ -8,4 +9,6 @@ import { Component } from '@angular/core';
   host: { style: 'display: contents' },
 })
 export class FooterComponent {
+  readonly googleCalendarUrl = googleCalendarUrl;
+  readonly icsUrl = icsUrl;
 }

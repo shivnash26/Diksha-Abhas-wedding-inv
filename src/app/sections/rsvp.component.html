@@ -20,21 +20,23 @@
         <div class="rsvp-12">
           <label class="rsvp-9">
             <span class="rsvp-10">Attending</span>
-            <select class="rsvp-13" name="attending">
+            <select class="rsvp-13" name="attending" (change)="attending = $any($event.target).value">
               <option value="yes">Joyfully accepts</option>
               <option value="no">Regretfully declines</option>
             </select>
           </label>
-          <label class="rsvp-9">
-            <span class="rsvp-10">Guests</span>
-            <select class="rsvp-13" name="guests">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5+</option>
-            </select>
-          </label>
+          @if (attending === 'yes') {
+            <label class="rsvp-9">
+              <span class="rsvp-10">Guests (including you)</span>
+              <select class="rsvp-13" name="guests" (change)="guests = $any($event.target).value">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5+</option>
+              </select>
+            </label>
+          }
         </div>
 
         <fieldset class="rsvp-14">
@@ -46,37 +48,32 @@
           </div>
         </fieldset>
 
-        <fieldset class="rsvp-14">
-          <legend class="rsvp-10">Will you be bringing someone with you?</legend>
-          <div class="rsvp-15">
-            @for (o of plusOne; track o) {
-              <label class="rsvp-16"><input class="rsvp-17" type="radio" name="plusOne" [value]="o">{{ o }}</label>
-            }
-          </div>
-        </fieldset>
+        @if (attending === 'yes') {
+          @if (guests !== '1') {
+            <label class="rsvp-9">
+              <span class="rsvp-10">Names of everyone coming with you</span>
+              <input class="rsvp-11" name="attendees" placeholder="e.g. Rahul, Priya">
+            </label>
+          }
 
-        <label class="rsvp-9">
-          <span class="rsvp-10">What are the names of people attending?</span>
-          <input class="rsvp-11" name="attendees" placeholder="Everyone coming with you">
-        </label>
+          <fieldset class="rsvp-14">
+            <legend class="rsvp-10">How will you be traveling to Lucknow?</legend>
+            <div class="rsvp-15">
+              @for (o of travel; track o) {
+                <label class="rsvp-16"><input class="rsvp-17" type="radio" name="travel" [value]="o">{{ o }}</label>
+              }
+            </div>
+          </fieldset>
 
-        <fieldset class="rsvp-14">
-          <legend class="rsvp-10">How will you be traveling to Lucknow?</legend>
-          <div class="rsvp-15">
-            @for (o of travel; track o) {
-              <label class="rsvp-16"><input class="rsvp-17" type="radio" name="travel" [value]="o">{{ o }}</label>
-            }
-          </div>
-        </fieldset>
-
-        <fieldset class="rsvp-14">
-          <legend class="rsvp-10">Which days will you join?</legend>
-          <div class="rsvp-15">
-            @for (o of days; track o) {
-              <label class="rsvp-16"><input class="rsvp-17" type="checkbox" name="d" [value]="o">{{ o }}</label>
-            }
-          </div>
-        </fieldset>
+          <fieldset class="rsvp-14">
+            <legend class="rsvp-10">Which days will you join?</legend>
+            <div class="rsvp-15">
+              @for (o of days; track o) {
+                <label class="rsvp-16"><input class="rsvp-17" type="checkbox" name="d" [value]="o">{{ o }}</label>
+              }
+            </div>
+          </fieldset>
+        }
 
         <label class="rsvp-9">
           <span class="rsvp-10">A note for the couple</span>
