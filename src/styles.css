@@ -382,7 +382,7 @@
 html { scroll-behavior: smooth; }
 body { margin:0; background:#faf4ec; color:#4a4038; font-family:'Cormorant Garamond',Georgia,serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
 a { color:#b81f4d; text-decoration:none; }
-a:hover { color:#8e1b3c; }
+@media (hover: hover) { a:not([class]):hover { color:#8e1b3c; } }
 ::selection { background:#f4d9e0; color:#8e1b3c; }
 input, select, textarea, button { font-family:'Cormorant Garamond',Georgia,serif; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -1637,7 +1637,7 @@ img.memories-photo:hover { transform:translateY(-4px); box-shadow:0 20px 36px rg
   text-decoration:none;
   transition:background .25s ease;
 }
-.ev-place:hover { background:rgba(255,255,255,.85); }
+@media (hover: hover) { .ev-place:hover { background:rgba(255,255,255,.85); } }
 .ev-place svg { width:14px; height:14px; fill:currentColor; opacity:.8; }
 .ev-cal { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:6px; }
 .ev-cal-btn {
@@ -1651,7 +1651,8 @@ img.memories-photo:hover { transform:translateY(-4px); box-shadow:0 20px 36px rg
   text-decoration:none;
   box-shadow:0 6px 16px -6px rgba(90,30,50,.5);
 }
-.ev-cal-btn:hover { filter:brightness(1.12); }
+@media (hover: hover) { .ev-cal-btn:hover { filter:brightness(1.12); } }
+.ev-cal-btn:active { filter:brightness(.92); }
 .ev-sep {
   opacity:0;
   transform:translateY(26px);
